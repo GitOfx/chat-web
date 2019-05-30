@@ -14,7 +14,7 @@
         </div>
         <div class="input-submit">
           <span @click="login">登录测试</span>
-          <span @click="regiest">注册</span>
+          <span @click="regiest">注册jernkens</span>
         </div>
       </form>
       <div class="bottom-contain">
