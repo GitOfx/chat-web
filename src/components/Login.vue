@@ -1,5 +1,5 @@
 <template>
-<!-- http://182.61.47.1:8080/swagger-ui.html#/ -->
+  <!-- http://182.61.47.1:8080/swagger-ui.html#/ -->
   <div class="login-bg">
     <div class="login-contain">
       <form>
@@ -13,15 +13,12 @@
           <input type="password" v-model="password">
         </div>
         <div class="input-submit">
-          <span @click="login">登录测试</span>
-          <span @click="regiest">注册jernkens</span>
+          <span @click="login">登录</span>
+          <span @click="regiest">注册</span>
+          {{errorMsg}}
         </div>
       </form>
-      <div class="bottom-contain">
-        
-         
-         
-      </div>
+      <div class="bottom-contain"></div>
     </div>
   </div>
 </template>
@@ -32,7 +29,8 @@ export default {
   data() {
     return {
       userName: "",
-      password: ""
+      password: "",
+      errorMsg:""
     };
   },
   methods: {
@@ -43,22 +41,25 @@ export default {
       })
         .then(res => {
           console.log("result ", res);
-          this.$router.push({path:`/chat?name=${this.userName}`})
-           
+          this.$router.push({ path: `/chat?name=${this.userName}` });
+          if (res.code == 0) {
+            
+          }else{
+            this.errorMsg = res.message
+          }
         })
         .catch(error => {
           console.log("error ", error);
         });
     },
-     regiest() {
+    regiest() {
       fetech("/regester", {
         user: this.userName,
         password: this.password
       })
         .then(res => {
           console.log("result ", res);
-          this.$router.push({path:`/chat?name=${this.userName}`})
-           
+          this.$router.push({ path: `/chat?name=${this.userName}` });
         })
         .catch(error => {
           console.log("error ", error);
@@ -119,11 +120,10 @@ export default {
     padding: 8px;
     width: 120px;
     font-size: 18px;
-    &:hover{
+    &:hover {
       background: #0a79e9;
     }
   }
-
 }
 
 .bottom-contain {

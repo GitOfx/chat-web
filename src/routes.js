@@ -12,7 +12,7 @@ export function createRouter() {
     mode: "history",
     fallback: false,
     routes: [{
-        path: '/chat/:name',
+        path: '/chat',
         component: Chat
       },
       {
