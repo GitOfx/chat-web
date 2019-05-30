@@ -13,7 +13,7 @@
           <input type="password" v-model="password">
         </div>
         <div class="input-submit">
-          <span @click="login">登录</span>
+          <span @click="login">登录测试</span>
           <span @click="regiest">注册</span>
         </div>
       </form>
