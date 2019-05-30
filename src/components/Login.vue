@@ -15,10 +15,12 @@
         <div class="input-submit">
           <span @click="login">登录</span>
           <span @click="regiest">注册</span>
-          {{errorMsg}}
+          
         </div>
       </form>
-      <div class="bottom-contain"></div>
+      <div class="bottom-contain">
+        {{errorMsg}}
+      </div>
     </div>
   </div>
 </template>
@@ -41,9 +43,9 @@ export default {
       })
         .then(res => {
           console.log("result ", res);
-          this.$router.push({ path: `/chat?name=${this.userName}` });
-          if (res.code == 0) {
-            
+          
+          if (res.code == 1) {
+            this.$router.push({ path: `/chat?name=${this.userName}` });
           }else{
             this.errorMsg = res.message
           }
@@ -58,8 +60,11 @@ export default {
         password: this.password
       })
         .then(res => {
-          console.log("result ", res);
-          this.$router.push({ path: `/chat?name=${this.userName}` });
+          if (res.code == 1) {
+            this.$router.push({ path: `/chat?name=${this.userName}` });
+          }else{
+            this.errorMsg = res.message
+          }
         })
         .catch(error => {
           console.log("error ", error);
@@ -127,11 +132,9 @@ export default {
 }
 
 .bottom-contain {
-  margin-top: 10px;
+  margin-top: 20px;
   text-align: center;
-
-  a {
-    color: #2f8be6;
-  }
+   color: wheat;
+  
 }
 </style>
