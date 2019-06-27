@@ -3,6 +3,8 @@ import Router from "vue-router"
 
 import Chat from "./components/Chat.vue"
 import Login from "./components/Login.vue"
+import edit from "./components/Editer.vue"
+import PreviewPage from './components/PreviewPage.vue'
 
 Vue.use(Router)
 
@@ -21,7 +23,15 @@ export function createRouter() {
       },
       {
         path: '/',
-        component: Login
+        component: PreviewPage
+      },
+      {
+        path: '/edit',
+        component: edit
+      },
+      {
+        path: '/preview',
+        component: PreviewPage
       }
     ]
   })
