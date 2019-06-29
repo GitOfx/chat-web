@@ -5,6 +5,7 @@ import Chat from "./components/Chat.vue"
 import Login from "./components/Login.vue"
 import edit from "./components/Editer.vue"
 import PreviewPage from './components/PreviewPage.vue'
+import ShowPage from './components/ShowPage.vue'
 
 Vue.use(Router)
 
@@ -32,7 +33,11 @@ export function createRouter() {
       {
         path: '/preview',
         component: PreviewPage
-      }
+      },
+      {
+        path: '/showpage',
+        component: ShowPage
+      },
     ]
   })
 
