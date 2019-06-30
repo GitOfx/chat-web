@@ -5,8 +5,8 @@
       <VBannerItem v-for="(item,index) in bannerList" :key="item.img">
         <img :src="item.img" @click="clickBanner(index)" />
       </VBannerItem>
-      <span class="arrow-left" @click="clickPre"><-</span>
-      <span class="arrow-right" @click="clickNext">-></span>
+      <span class="arrow-left" @click="clickPre" v-if="showArrow"><-</span>
+      <span class="arrow-right" @click="clickNext" v-if="showArrow">-></span>
       <div class="indctor">
         <span
           v-for="(item,index) in bannerList"
@@ -26,7 +26,12 @@ import { clearInterval } from "timers";
 export default {
   name: "VBanner",
   components: { VBannerItem },
-  props: {},
+  props: {
+    showArrow:{
+      type:Boolean,
+      default:true
+    }
+  },
 
   data() {
     return {

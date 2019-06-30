@@ -143,7 +143,7 @@ export default {
       this.$refs.editer.focus();
       this.showLink = false;
       if (!!this.linkAdd) {
-        let linkHtml = `<a href='${this.linkAdd}'>${this.linkName}</a>`;
+        let linkHtml = `<a href='${this.linkAdd}'>${this.}</a>`;
         document.execCommand("insertHTML", false, linkHtml);
         console.log("add1", linkHtml);
         this.linkAdd = "";
@@ -157,7 +157,7 @@ export default {
     clickCmd(cmd, arg) {
       this.cmd = cmd;
 
-      let exeResult = document.execCommand("italic", false, !!arg?arg:null);
+      let exeResult = document.execCommand(cmd, false, !!arg?arg:null);
 
       let index = this.exedCmd.indexOf(cmd);
       console.log("execCommand ", cmd,  !!arg?arg:null)
