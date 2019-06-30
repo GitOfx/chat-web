@@ -5,14 +5,13 @@
     2，加载状态及监听
     3，事件回调   外层通过:click props传回调进来  或者里面emeit函数出去 @click接收
     4, enable 状态切换
-    5，ripple效果
   -->
  
-  <button class="btn"  :class="modifier" @click="handleClick" :disabled="disabled">
+  <button class="btn"  :class="modifier" @click="handleClick" :disabled="disabled" :style="btnstyle">
     <img src="../assets/icon1.png" v-if="!!icon" style="width:1em" >
     <Loading class="loading" v-if="loading"></Loading>
     <span> 
-      <slot>{{disabled}}</slot>
+      <slot></slot>
     </span>
   </button>
 </template>
@@ -39,14 +38,25 @@ export default {
       default:false
     },
     icon:{
-      icon:String,
+      type:String,
       default:""
-    }
+    },
+    btnstyle:{
+      type:Object,
+     default: () => {}
+    },
   },
   data() {
-    return {};
+    return {
+      
+    };
   },
 
+  watch: {
+    loading(nvl,ovl){
+      console.log("watch loading",nvl)
+    }
+  },
   created() {
     console.log("modifier", this.modifier);
  
@@ -104,7 +114,7 @@ $base-font-size: 22px;
   }
 }
 
-.btnOutline {
+.outline {
   // display: inline-block;
   border: 1px solid $base-color;
   background: transparent;

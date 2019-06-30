@@ -24,12 +24,12 @@ ddr-contain{
     height: 1.2em;
     display: inline-block;
     margin: 1px;
-    background-color: #00ff00;
+    background-color: #d6a00c;
     animation: loading 1s infinite ease-in-out;
-    /*animation：动画名称 持续时间 动画速度曲线 延迟 执行多少次 是否正反方向轮流播放*/
+    
 }
 .ddr2{
-    animation-delay: -0.9s;/*定义开始执行的地方，负号表示直接从第900ms开始执行*/
+    animation-delay: -0.9s; 
 }
 .ddr3{
     animation-delay: -0.8s;
@@ -41,7 +41,7 @@ ddr-contain{
     animation-delay: -0.6s;
 }
 @keyframes loading {
-    0%,40%,100%{ /*定义每帧的动作*/
+    0%,40%,100%{ 
         -webkit-transform: scaleY(0.5);
     }
     20%{

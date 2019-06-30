@@ -1,5 +1,5 @@
 <template>
-    <div class="drop-list" ref="drop-contain">
+    <div class="drop-list" ref="dropContain">
         <div class="list-head" @mouseover="onDropShow($event)" @mouseout="onDropHide($event)" @click="clickHead" :style="headStyle">
             <span>{{selectMenu}}</span>
             <img @click="clickImg" src="@/assets/arrow-down.png" style="width: 1.5em;vertical-align: middle"
@@ -9,7 +9,7 @@
         <transition name="drop-anima">
             <div>
                 <ul v-show="showDrop" @mouseover="onDropShow($event)" @mouseout="onDropHide($event)" ref="menus"
-                    class="menus">
+                    class="menus" :class="{'menus-top':this.position=='top','menus-bottom':this.position=='bottom'}">
                     <v-drop-item v-for="(menu,index) in dataList" :key="index" :item-data="menu"
                                  @click="clickItem(menu)">
                     </v-drop-item>
@@ -55,6 +55,7 @@
         },
         data() {
             return {
+                position:'bottom',
                 selectMenu: this.value,
                 showDrop: false,
                 showFlag: false,
@@ -64,7 +65,8 @@
                         return {content: item}
                     }
                     return item;
-                })
+                }),
+                menusOffsetHeight:0 //初始化高度问题
             }
         },
         watch: {
@@ -72,23 +74,25 @@
                 this.selectMenu = newShow;
             },
             showDrop: function (newShow, oldShow) {
-                let contain = this.$refs['drop-contain']
-                let menus = this.$refs['menus']
-
-                let containOffsetHeight = contain.offsetHeight
-                let menusOffsetHeight = menus.offsetHeight
+                let contain = this.$refs.dropContain
+                let menus = this.$refs.menus
+                    console.log("contain ", this.$refs,contain)
+                let containOffsetHeight = this.getElementTop(contain)
+                this.menusOffsetHeight = menus.offsetHeight > 0?menus.offsetHeight:this.menusOffsetHeight
                 let docScrollHei = document.body.scrollTop
                     || document.documentElement.scrollTop || 0;
 
                 let docHeight = document.documentElement.clientHeight
                     || document.body.clientHeight || 0;
 
-                if ((containOffsetHeight + menusOffsetHeight - docScrollHei) > docHeight) {
+                if ((containOffsetHeight + this.menusOffsetHeight - docScrollHei) > docHeight) {
                     this.position = 'top';
                 } else {
                     this.position = 'bottom';
                 }
-                // console.log("showDrop ", newShow)
+                
+                console.log("showDrop ", newShow,this.position)
+                console.log("containOffsetHeight menusOffsetHeight docScrollHei docHeight", containOffsetHeight,this.menusOffsetHeight,docScrollHei,docHeight)
             }
         },
         methods: {
@@ -144,9 +148,13 @@
 
 <style scoped lang="scss">
 
-    .menus {
-        /*bottom: 100%;*/
+    .menus-top {
+        bottom: 100%;
+        
+    }
+    .menus-bottom {
         top: 110%;
+         
     }
 
     .drop-list {
