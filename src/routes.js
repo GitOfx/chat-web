@@ -24,7 +24,7 @@ export function createRouter() {
       },
       {
         path: '/',
-        component: PreviewPage
+        component: ShowPage
       },
       {
         path: '/edit',

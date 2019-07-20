@@ -143,7 +143,7 @@ export default {
       this.$refs.editer.focus();
       this.showLink = false;
       if (!!this.linkAdd) {
-        let linkHtml = `<a href='${this.linkAdd}'>${this.}</a>`;
+        let linkHtml = `<a href='${this.linkAdd}'>${this.linkAdd}</a>`;
         document.execCommand("insertHTML", false, linkHtml);
         console.log("add1", linkHtml);
         this.linkAdd = "";
