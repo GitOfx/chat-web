@@ -1,7 +1,8 @@
 <template>
     <div >
         <!-- <Clippathview></Clippathview> -->
-        <Css3D></Css3D>
+        <!-- <Css3D> </Css3D> -->
+        <FlexDoc></FlexDoc>
     </div>
 </template>
 
@@ -13,9 +14,10 @@
     import Clippathview from "@/components/Clippath"
     import CssWether from "@/components/CssWether"
      import Css3D from "@/components/Css3D"
+     import FlexDoc from "@/components/FlexDoc"
     export default {
         name: "ShowPage",
-        components: {VContentEditer, VDropItem, VDropList, VButton,Clippathview,CssWether,Css3D},
+        components: {VContentEditer, VDropItem, VDropList, VButton,Clippathview,CssWether,Css3D,FlexDoc},
         data() {
             return {
                 

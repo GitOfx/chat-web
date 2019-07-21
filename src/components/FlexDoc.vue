@@ -4,7 +4,8 @@
         <p>弹性盒子是 CSS3 的一种新的布局模式。
             CSS3 弹性盒（ Flexible Box 或 flexbox），是一种当页面需要适应不同的屏幕大小以及设备类型时确保元素拥有恰当的行为的布局方式。
             引入弹性盒布局模型的目的是提供一种更加有效的方式来对一个容器中的子元素进行排列、对齐和分配空白空间。</p>
-        <p>Flex提供容器和字项两类属性，容器属性可以统一控制子项的位置偏移，排列、对齐方式</p>
+        <p>Fultter和小程序也都用的flex布局</p>
+        <p>Flex提供容器和字项两类属性，容器属性可以统一控制子项的位置偏移，排列、对齐方式，子项来单独调整各自排列方式</p>
         <div class="menu-contain">
             <div class="menu-item">
                 <p v-for="item in containAttr">{{item}}</p>
@@ -14,9 +15,16 @@
             </div>
         </div>
         <h2>属性</h2>
-
-        <div class="show-contain">
+        <p ><strong>display:flex | inline-flex</strong></p>
+        <div class="show-contain" >
             <div>
+                <p><strong>display:</strong> 设置容器的盒子属性</p>
+                <div class="radio">
+                    <label v-for="item in displayAttrList" :key="item.name" @mouseover="showDesc(item,$event)"
+                           @mouseleave="hideDesc(item,$event)">
+                        <input type="radio" name="display" :value="item.name" v-model="displayValue"/>{{item.name}}
+                    </label>
+                </div>
                 <p><strong>flex-direction:</strong> 可以控制容器内的排列顺序，水平排列或者竖直，或者反着</p>
                 <div class="radio">
                     <label v-for="item in flexDirectionAttr" :key="item.name" @mouseover="showDesc(item,$event)"
@@ -59,18 +67,21 @@
             </div>
 
             <div style="min-height: 500px">
-                <div class="flex-content"
-                     :style="{flexDirection:directValue,flexWrap:wrapValue,justifyContent:justifyContentValue,alignContent:alignContentValue,alignItems:alignItemsValue}">
+                <div class="flex-content"  
+                     :style="{flexDirection:directValue,flexWrap:wrapValue,justifyContent:justifyContentValue,alignContent:alignContentValue,alignItems:alignItemsValue,display:displayValue}">
                     <!--                <div v-for="(item,index) in animaSrc" :data-index="index" >-->
                     <!--                    <img :src="item">-->
                     <!--                    &lt;!&ndash;                    <span style="position: relative;border-radius: 50%;background-color: red;padding: 8px;bottom: 100%;top:-100%;">{{index}}</span>&ndash;&gt;-->
                     <!--                </div>-->
                     <div v-for="(item,index) in dataSrc" class="show-item" :key="index"
                          :class="{'selectItem':item.selected}" @click="clickItem(item)"
-                         :style="{background:item.color,width:item.w,height:item.h,marginLeft:'10px',textAlign:'center',
+                         :style="{background:item.color,width:item.w,height:item.h,textAlign:'center',
                          order:item.order,flexGrow: item.grow,flexShrink: item.shrink,flexBasis: item.basic,alignSelf:item.alignSelf}">
                         <span>{{item.index}}</span>
-                        <!--                    <span style="position: relative;border-radius: 50%;background-color: red;padding: 8px;bottom: 100%;top:-100%;">{{index}}</span>-->
+                         <!-- <div  v-if="index==dataSrc.length-1" >
+                             <img  src="http://image.jiedianqian.com//activity/可乐460.png">
+                         </div> -->
+                         
                     </div>
                 </div>
             </div>
@@ -87,7 +98,7 @@
                                                                                     v-model="selectItemStyle.flexShrink"
                                                                                     style="margin: 10px">{{selectItemStyle.flexShrink}}
                 </p>
-                <p><strong>flex-basis:</strong> 定义了在分配剩余空间之前元素的默认大小 <input type="range" min="0" max="300"
+                <p><strong>flex-basis:</strong> 定义了在分配剩余空间之前元素的默认大小  {{selectItemStyle.flexBasis}}<input type="range" min="0" max="300"
                                                                            v-model="selectItemStyle.flexBasis"
                                                                            style="margin: 10px">{{selectItemStyle.flexBasis
                     == 300? "auto":selectItemStyle.flexBasis}}</p>
@@ -103,9 +114,8 @@
         <p><strong>flex-flow: <‘flex-direction’> || <‘flex-wrap’></strong></p>
         <p><strong>place-content: <'align-content'> <'justify-content'></strong></p>
         <p><strong>flex: none | auto | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]</strong></p>
-        <p>align-content为flex-end的时候 滚动条问题</p>
-        <p>可乐图片过大挤压问题</p>
-        <p>just content空间分配</p>
+        <p>20个的时候 align-content为flex-end的时候 滚动条问题</p>
+        
         <div id="attDesc" style="display: none">
             <div>
                 <span>{{showPopDesc}}</span>
@@ -113,7 +123,7 @@
         </div>
 
         <h2>应用</h2>
-        <p>信用生活</p>
+        <p>信用生活 上中下三部分中间填充滚动</p>
         <div style="width: 540px;height: 960px;border-radius: 4px;border: grey solid 1px; margin: 0 auto;display: flex;flex-direction: column">
             <div style="border-bottom: 1px solid grey;text-align:center;padding: 15px;">
                 <span style="font-weight: bolder;font-size: 20px;">信用生活</span>
@@ -198,9 +208,9 @@
                     <p style="margin:0;padding: 10px;border-radius:10px 10px 0 0;background: linear-gradient(#FC3E48,#FC4D55);color: white;">
                         <span style="font-size: 20px;font-weight: bold;margin-right: 15px;font-style: italic">秒杀规则</span>今日秒杀
                     </p>
-                    <div style="display: flex;width: 100%;justify-content: space-around;">
-                        <div style="flex: 1;align-self: center;text-align: center">
-                            <img style="width: 100px" src="http://image.jiedianqian.com//activity/可乐460.png">
+                    <div style="display: flex;width: 100%;justify-content: space-around;flex-wrap:nowrap">
+                        <div style="flex: 1.5;align-self: center;text-align: center">
+                            <img style="width:100px" src="http://image.jiedianqian.com//activity/可乐460.png">
                             <p style="margin: 0;background: rgba(247,130,12,.8);border-radius: 15px;padding: 5px 8px;color: white">
                                 价值￥48</p>
                         </div>
@@ -298,6 +308,12 @@
                 </div>
             </div>
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <!-- <p>可乐图片过大挤压问题</p> -->
+        <!-- <p>just content空间分配</p> -->
     </div>
 </template>
 
@@ -327,7 +343,8 @@
                     let h = index % 2 == 0 ? '100px' : '200px'
                     return {
                         index: index,
-                        color: "#CC7A31", w: w,
+                        color: "#CC7A31", 
+                        w: w,
                         h: h,
                         order: 0,
                         grow: 0,
@@ -342,6 +359,7 @@
                 justifyContentValue: "flex-start",
                 alignContentValue: "flex-start",
                 alignItemsValue: "flex-start",
+                displayValue: "flex",
                 //['row','row-reverse','column','column-reverse']
                 flexDirectionAttr: [
                     {
@@ -359,8 +377,8 @@
                     },
                 ],
                 flexWapAttr: [
-                    {name: "nowrap ", desc: "默认值，表示单行显示，不换行"},
-                    {name: "wrap ", desc: "宽度不足换行显示"},
+                    {name: "nowrap", desc: "默认值，表示单行显示，不换行，会按设置宽度比例缩小"},
+                    {name: "wrap", desc: "宽度不足换行显示,"},
                     {name: "wrap-reverse ", desc: "宽度不足换行显示，但是是从下往上开始，也就是原本换行在下面的子项现在跑到上面"},
                 ],
                 justifyContentAttr: [
@@ -374,7 +392,7 @@
                 alignItemsAttr: [
                     {
                         name: "stretch",
-                        desc: "默认值。flex子项拉伸。在演示中我们可以看到白蓝径向渐变背景区域是上下贯穿flex容器的，就是因为flex子项的高度拉伸到容器高度导致。如果flex子项设置了高度，则按照设置的高度值渲染，而非拉伸"
+                        desc: "默认值。flex子项拉伸。如果flex子项设置了高度，则按照设置的高度值渲染，而非拉伸，去掉高度可以看出差别"
                     },
                     {name: "flex-start", desc: "与文档流方向相关。默认表现为容器顶部对齐"},
                     {name: "flex-end", desc: "与文档流方向相关。默认表现为容器底部对齐"},
@@ -402,11 +420,15 @@
                     {name: "baseline", desc: "表现为所有flex子项都相对于flex容器的基线对齐"},
                 ],
                 childAttrList: [
-                    {name: "order", desc: 'flex子项的排序位置'},
-                    {name: "flex-grow", desc: 'flex子项所占据的宽度，扩展所侵占的空间就是除去元素外的剩余的空白间隙。'},
-                    {name: "flex-shrink", desc: '主要处理当flex容器空间不足时候，单个元素的收缩比例'},
-                    {name: "flex-basis", desc: '定义了在分配剩余空间之前元素的默认大小'},
+                    {name: "order", desc: 'flex子项的排序位置，默认都是0，没设置就跟默认的比'},
+                    {name: "flex-grow", desc: 'flex子项所占据的宽度权重，扩展所侵占的空间就是除去元素外的剩余的空白间隙。在所在行'},
+                    {name: "flex-shrink", desc: '主要处理当flex容器空间不足时候，单个元素的收缩比例，横竖对应宽高'},
+                    {name: "flex-basis", desc: '定义了在分配剩余空间之前元素的默认大小，如果元素上同时设置了width和flex-basis,那么flex-basis会覆盖width的值。'},
                     {name: "align-self", desc: '控制单独某一个flex子项的垂直对齐方式'},
+                ],
+                displayAttrList: [
+                    {name: "flex", desc: '将容器对象作为弹性伸缩盒显示'},
+                    {name: "inline-flex", desc: '将对象作为内联块级弹性伸缩盒显示'},
                 ],
                 showPopDesc: "",
                 currentItem: null
@@ -605,7 +627,7 @@
 
             label {
                 line-height: 30px;
-                margin-left: 10px;
+                // margin-left: 10px;
 
             }
         }
@@ -618,6 +640,7 @@
             padding: 8px;
             display: flex;
             height: 500px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
 
 
