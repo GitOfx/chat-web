@@ -2,7 +2,9 @@
     <div >
         <!-- <Clippathview></Clippathview> -->
         <!-- <Css3D> </Css3D> -->
-        <FlexDoc></FlexDoc>
+        <!-- <FlexDoc></FlexDoc> -->
+        <!-- <Svgg></Svgg> -->
+        <VPregress></VPregress>
     </div>
 </template>
 
@@ -15,9 +17,11 @@
     import CssWether from "@/components/CssWether"
      import Css3D from "@/components/Css3D"
      import FlexDoc from "@/components/FlexDoc"
+     import Svgg from "@/components/Svg"
+     import VPregress from "@/components/css-effect/proress"
     export default {
         name: "ShowPage",
-        components: {VContentEditer, VDropItem, VDropList, VButton,Clippathview,CssWether,Css3D,FlexDoc},
+        components: {VContentEditer, VDropItem, VDropList, VButton,Clippathview,CssWether,Css3D,FlexDoc,Svgg,VPregress},
         data() {
             return {
                 

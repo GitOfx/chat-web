@@ -1,4 +1,6 @@
 <template>
+<!-- https://www.zhangxinxu.com/wordpress/2012/09/css3-3d-transform-perspective-animate-transition/ -->
+<!-- https://www.zhangxinxu.com/wordpress/2015/03/css3-clip-path-polygon-shape-transition-animation/ -->
   <div>
     {{index}}
     <div>
